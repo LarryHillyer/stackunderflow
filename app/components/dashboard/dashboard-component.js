@@ -9,8 +9,8 @@ app.controller('DashboardController', function($rootScope, $scope){
 	 * 
 	 * */
      
-      $scope.memberProfile = function () {
-		$scope.memberProfile.username = ''
+      $scope.updateMember = function () {
+		$rootScope.member.$save()
 		// firstName: string,
 		// lastName: string,
 		// imgUrl:  string,

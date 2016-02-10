@@ -9,8 +9,8 @@
 <p>The questions can be orderby max upvotes or by date created depending on the users choice.</p>
 <p>The question can be filtered based upon tags, unanswered</p>
 <p>No voting from this page.</p>-->
-
-<section class="question-container" ng-show="!activeQuestion && member" >
+<!--ng-show="!activeQuestion && member" -->
+<section class="question-container">  
                 <div class="col-sm-12">
                     <div>
                         <input type="text" ng-model="query" />
@@ -23,7 +23,7 @@
                     </div>
                     <div class="question-list">
                         <ul>
-                            <li ng-repeat="question in questionsArr | filter: query | orderBy: sortOrder track by $index">
+                            <li ng-repeat="question in questions | filter: query | orderBy: sortOrder track by $index">
                                 <div ng-click="upVote(question)" class="glyphicon glyphicon-hand-up"></div>
                                 <div ng-click="downVote(question)" class="glyphicon glyphicon-hand-down"></div>
                                 <p>Total Votes: {{question.votes}}</p>
@@ -40,7 +40,7 @@
                         <input class="form-control" type="text" name="userName" ng-model="newQuestion.userName" size="width: 100px" placeholder="Enter your User Name">
                         <input class="form-control" type="text" name="tag" ng-model="newQuestion.tag" size="width: 50px" placeholder="ie. Javascript, food, ...one word to categorize your queston">
                         <textarea row="5" class="form-control" type="text" name="Question" ng-model="newQuestion.body" placeholder="Enter your Question (long version)"></textarea>
-                        <button ng-click="addQuestion()">Add Question </button>
+                        <button ng-click="addQuestion(newQuestion)">Add Question </button>
                     </div>
                 </div>
             </section>

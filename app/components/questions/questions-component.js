@@ -1,53 +1,39 @@
-app.controller('QuestionsController', function($rootScope, $scope, DataService){
+/* global Firebase */
+app.controller('QuestionsController', function($rootScope, $scope, DataService, $state, FBREF, $firebaseArray, $firebaseObject){
 	/**
 	 * $scope.tags and $scope.questions are $firebaseArrays from AngularFire 
 	 * To see the methods at your disposal look here
 	 * https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray
 	 * */
+     
+    //  var db = new Firebase(FBREF);
+      
 	$scope.tags = DataService.getTags();
 	$scope.questions = DataService.getQuestions();
 	
-	/**
-	 * $scope.addQuestion = function(newQuestion){
-	 * 	newQuestion.memberId = $rootScope.member.uid;
-	 * 	$scope.questions.$add(newQuestion).then(function(ref){
-	 * 	  //Add the newly added question to the member object	
-	 * 	  $rootScope.member.questions = $rootScope.member.questions || {};
-	 *    //Another Dictonary structure all we are doing is adding the questionId to the member.questions dictionary.
-	 *    //To avoid duplicating data in our database we only store the questionId instead of the entire question again 
-	 *    $rootScope.member.questions[ref.id] = ref.id;
-	 *    $rootScope.member.$save();
-	 *  })
-	 * }
- 
-       */
- 
-
- 
- 	//   $scope.addQuestion = function (newQuestion) {
-    //     newQuestion.memberId = $rootScope.member.uid;
-    //     $scope.questions.$add(newQuestion).then(function (ref) {
- 
-     var id = 2367;
-    // var mc = this;
-    // var db = new Firebase(FBREF);
-
- $scope.addQuestion = function () {
-        $scope.newQuestion.date = Date.now();
-        $scope.newQuestion.responses = [];
-        $scope.newQuestion.id = id;
-        id++;
-        $scope.newQuestion.votes = 0;
-        $scope.questionsArr.$add($scope.newQuestion);
-        $scope.newQuestion = "";
-    }
-    $scope.removeQuestion = function (index) {
-        $scope.questionsArr.splice(index, 1)
-        
-        
-    }
 	
-});
+	  $scope.addQuestion = function(newQuestion){
+	 	newQuestion.memberId = $rootScope.member.$id;
+         $scope.newQuestion.date = Date.now();
+	 	$scope.questions.$add(newQuestion).then(function(ref){
+	  	  //Add the newly added question to the member object	
+	  	  $rootScope.member.questions = $rootScope.member.questions || {};
+	    //Another Dictonary structure all we are doing is adding the questionId to the member.questions dictionary.
+	     //To avoid duplicating data in our database we only store the questionId instead of the entire question again 
+	     $rootScope.member.questions[ref.key()] = ref.key();
+	     $rootScope.member.$save();
+         })
+      
+      }
+       $scope.setActiveQuestion = function(question){
+
+        $scope.activeQuestion = $firebaseObject(new Firebase(FBREF + 'questions/' +question.$id));
+        $scope.activeQuestionResponses = $firebaseArray(new Firebase(FBREF + 'questions/' +question.$id + '/responses'))
+            $state.go('question')
+    }
+})  
+
+
        
 	//  * question Schema
 	//  * {
@@ -82,7 +68,7 @@ app.controller('QuestionController', function($rootScope, $scope, question, comm
 	 * 
 	 * think of it this way 
 	 * 
-	 * $scope.question.votes[$rootScope.member.uid] = 1 || -1
+	 * $scope.question.votes[$rootScope.member.$id] = 1 || -1
 	 * 
 	 * This logic here should help keep your voteCount on track
 	 * $scope.question.voteCount = 0;
@@ -110,9 +96,9 @@ app.controller('QuestionController', function($rootScope, $scope, question, comm
 	 *  })
 	 * }
 	 * question Schema
-	 * {
 	 *  title: string,
 	 *  body: string,
+	 * {
 	 *  votes: {memberId: number},
 	 *  author: string,
 	 *  posted: date,
@@ -121,5 +107,5 @@ app.controller('QuestionController', function($rootScope, $scope, question, comm
 	 *	tags: [tags] 
 	 * } 
 	 */
-	
+   	
 });
