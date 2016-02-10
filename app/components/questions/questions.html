@@ -1,6 +1,6 @@
 <h1>QUESTIONS</h1>
 
-<p>If we are logged in we should have a member obj {{member}}</p>
+<!--<p>If we are logged in we should have a member obj {{member}}</p>
 
 <h2>Responsibilites</h2>
 <p>It is your responsibility to get the questions from firebase to show up here.</p>
@@ -8,4 +8,39 @@
 <p>It would also be nice if there is some sort of visual indicator that shows if the question has been answered already, and how many upvotes or downvotes the question itself has.</p>
 <p>The questions can be orderby max upvotes or by date created depending on the users choice.</p>
 <p>The question can be filtered based upon tags, unanswered</p>
-<p>No voting from this page.</p>
+<p>No voting from this page.</p>-->
+
+<section class="question-container" ng-show="!activeQuestion && member" >
+                <div class="col-sm-12">
+                    <div>
+                        <input type="text" ng-model="query" />
+                        <button class="btn-group" role="group" ng-click="sortOrder = 'tag'">Sort by Tag</button>
+                        <button class="btn-group" role="group" ng-click="sortOrder = 'userName'">Sort by User</button>
+                        <button class="btn-group" role="group" ng-click="sortOrder = '-date'">Sort by Date</button>
+                    </div>
+                    <div class="question-header">
+                        <h2 class="fa">Questions</h2>
+                    </div>
+                    <div class="question-list">
+                        <ul>
+                            <li ng-repeat="question in questionsArr | filter: query | orderBy: sortOrder track by $index">
+                                <div ng-click="upVote(question)" class="glyphicon glyphicon-hand-up"></div>
+                                <div ng-click="downVote(question)" class="glyphicon glyphicon-hand-down"></div>
+                                <p>Total Votes: {{question.votes}}</p>
+                                <h3>{{question.questionSummary}}</h3>
+                                <p>{{question.tag}}</p>
+                                <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
+                                <br>
+                                <button ng-click="setActiveQuestion(question)">GO TO QUESTION</buttonn>
+                                    <button ng-click="removeQuestion($index)">Remove YOUR QUESTION </button>
+                            </li>
+                        </ul>
+                        <input class="form-control" type="text" name="questionSummary" ng-model="newQuestion.questionSummary" style:="width: 300px"
+                        placeholder="Enter short description of your question">
+                        <input class="form-control" type="text" name="userName" ng-model="newQuestion.userName" size="width: 100px" placeholder="Enter your User Name">
+                        <input class="form-control" type="text" name="tag" ng-model="newQuestion.tag" size="width: 50px" placeholder="ie. Javascript, food, ...one word to categorize your queston">
+                        <textarea row="5" class="form-control" type="text" name="Question" ng-model="newQuestion.body" placeholder="Enter your Question (long version)"></textarea>
+                        <button ng-click="addQuestion()">Add Question </button>
+                    </div>
+                </div>
+            </section>

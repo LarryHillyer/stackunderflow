@@ -19,21 +19,50 @@ app.controller('QuestionsController', function($rootScope, $scope, DataService){
 	 *    $rootScope.member.$save();
 	 *  })
 	 * }
-	 * question Schema
-	 * {
-	 *  title: string,
-	 *  body: string,
-	 *  votes: {memberId: number},
-	 *  author: string,
-	 *  posted: date,
-	 *  answeredOn: date,
-	 *  answered: bool, 
-	 *	tags: [tags] 
-	 * } 
-	 */
+ 
+       */
+ 
 
+ 
+ 	//   $scope.addQuestion = function (newQuestion) {
+    //     newQuestion.memberId = $rootScope.member.uid;
+    //     $scope.questions.$add(newQuestion).then(function (ref) {
+ 
+     var id = 2367;
+    // var mc = this;
+    // var db = new Firebase(FBREF);
+
+ $scope.addQuestion = function () {
+        $scope.newQuestion.date = Date.now();
+        $scope.newQuestion.responses = [];
+        $scope.newQuestion.id = id;
+        id++;
+        $scope.newQuestion.votes = 0;
+        $scope.questionsArr.$add($scope.newQuestion);
+        $scope.newQuestion = "";
+    }
+    $scope.removeQuestion = function (index) {
+        $scope.questionsArr.splice(index, 1)
+        
+        
+    }
 	
 });
+       
+	//  * question Schema
+	//  * {
+	//  *  title: string,
+	//  *  body: string,
+	//  *  votes: {memberId: number},
+	//  *  author: string,
+	//  *  posted: date,
+	//  *  answeredOn: date,
+	//  *  answered: bool, 
+	//  *	tags: [tags] 
+	//  * } 
+	//  */
+
+
 
 app.controller('QuestionController', function($rootScope, $scope, question, comments, responses){
 	/**
