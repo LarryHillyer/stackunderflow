@@ -22,15 +22,11 @@ app.controller('QuestionsController', function($rootScope, $scope, DataService, 
 	     //To avoid duplicating data in our database we only store the questionId instead of the entire question again 
 	     $rootScope.member.questions[ref.key()] = ref.key();
 	     $rootScope.member.$save();
+
          })
       
       }
-       $scope.setActiveQuestion = function(question){
 
-        $scope.activeQuestion = $firebaseObject(new Firebase(FBREF + 'questions/' +question.$id));
-        $scope.activeQuestionResponses = $firebaseArray(new Firebase(FBREF + 'questions/' +question.$id + '/responses'))
-            $state.go('question')
-    }
 })  
 
 
@@ -83,29 +79,75 @@ app.controller('QuestionController', function($rootScope, $scope, question, comm
 	$scope.comments = comments;
 	$scope.responses = responses;
 	
-	/**
-	 * $scope.addComment = function(newQuestion){
-	 * 	newComment.memberId = $rootScope.member.uid;
-	 * 	$scope.comments.$add(newQuestion).then(function(ref){
-	 * 	  //Add the newly added comment to the member object	
-	 * 	  $rootScope.member.comments = $rootScope.member.comments || {};
-	 *    //Another Dictonary structure all we are doing is adding the commentId to the member.comments dictionary.
-	 *    //To avoid duplicating data in our database we only store the commentId instead of the entire question again 
-	 *    $rootScope.member.comments[ref.id] = ref.id;
-	 *    $rootScope.member.$save();
-	 *  })
-	 * }
-	 * question Schema
-	 *  title: string,
-	 *  body: string,
-	 * {
-	 *  votes: {memberId: number},
-	 *  author: string,
-	 *  posted: date,
-	 *  answeredOn: date,
-	 *  answered: bool, 
-	 *	tags: [tags] 
-	 * } 
-	 */
+
+	  $scope.addComment = function(newQuestion){
+	  	$scope.newComment.memberId = $rootScope.member.$id;
+	 	$scope.comments.$add(newQuestion).then(function(ref){
+	  	  //Add the newly added comment to the member object	
+	  	  $rootScope.member.comments = $rootScope.member.comments || {};
+	     //Another Dictonary structure all we are doing is adding the commentId to the member.comments dictionary.
+	     //To avoid duplicating data in our database we only store the commentId instead of the entire question again 
+	     $rootScope.member.comments[ref.key()] = ref.key();
+	     $rootScope.member.$save();
+	   })
+	  }
+       $scope.addResponse = function(newResponse){
+	  	$scope.newResponse.memberId = $rootScope.member.$id;
+	 	$scope.responses.$add(newResponse).then(function(ref){
+	  	  //Add the newly added comment to the member object
+	  	  $rootScope.member.responses = $rootScope.member.responses || {};
+	     //Another Dictonary structure all we are doing is adding the commentId to the member.comments dictionary.
+	     //To avoid duplicating data in our database we only store the commentId instead of the entire question again 
+	     $rootScope.member.responses[$scope.question.$id]= $rootScope.member.responses[$scope.question.$id] || {};
+         $rootScope.member.responses[$scope.question.$id][ref.key()] = ref.key();
+	     $rootScope.member.$save();
+	   })
+	  }
+      
+	//  * question Schema
+	//  *  title: string,
+	//  *  body: string,
+	//  * {
+	//  *  votes: {memberId: number},
+	//  *  author: string,
+	//  *  posted: date,
+	//  *  answeredOn: date,
+	//  *  answered: bool, 
+	//  *	tags: [tags] 
+	//  * } 
+	//  */
    	
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// The almost code for the security on firebase
+// {
+//   "rules": {
+//     "users": {
+//       "$uid": {
+//         ".read": "auth != null && auth.uid == $uid"
+//       }
+//     },
+//     "questions":{
+//       ".read": true
+//     },
+//     "tags":{
+//       ".read": true
+//     }
+//   }
+// }

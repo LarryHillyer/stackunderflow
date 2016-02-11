@@ -1,75 +1,73 @@
-<!--<h1>A SINGLE QUESTION VIEW</h1>
+    <!--<h1>A SINGLE QUESTION VIEW</h1>
 
-<p>If we are logged in we should have a member obj {{member}}</p>
+    <p>If we are logged in we should have a member obj {{member}}</p>
 
-<h3>Question Rules</h3>
-<p>A member must be logged in to cast votes, ask questions, add responses, or add comments</p>
-<p>A member may not upvote their own questions/answers/comments</p>
-<p>Only the member who posted the the questions can mark an answer as the correct answer</p>
-<p>Only the member who posted the the questions/answers/comments can edit their content</p>
-<p>A member may only upvote the questions/answers/comments once.</p>
-<p>A member can change their vote to either up or down but may not vote both ways.</p>-->
+    <h3>Question Rules</h3>
+    <p>A member must be logged in to cast votes, ask questions, add responses, or add comments</p>
+    <p>A member may not upvote their own questions/answers/comments</p>
+    <p>Only the member who posted the the questions can mark an answer as the correct answer</p>
+    <p>Only the member who posted the the questions/answers/comments can edit their content</p>
+    <p>A member may only upvote the questions/answers/comments once.</p>
+    <p>A member can change their vote to either up or down but may not vote both ways.</p>-->
 
-      <section class="responses-container">
-                <div class="col-sm-12">
-                    <div class="response-header">
-                        <h1 ng-click="goBack()">GO BACK</h1>
-                        <!--activeQuestion=''-->
-                        <h2>The Active Question is {{activeQuestion.body}}</h2>
-                    </div>
-                    <div class="responses-list">
-                        <ul>
-
-                            <li ng-repeat="response in activeQuestion.responses">{{response.body}}
-                                <label>
-                                    <input type="checkbox" ng-model="response.solution.value">Solution</label>
-
-                                <li ng-repeat="response in activeQuestion.responses">
-                                    <div ng-click="upVote(response)" class="glyphicon glyphicon-hand-up"> </div>
-                                    <div ng-click="downVote(response)" class="glyphicon glyphicon-hand-down"> </div>
-                                    <p>Total Votes: {{response.votes}}</p>
-                                    <p>{{response.body}}</p>
-
-
-
-                                    <div class="comments-list">
-                                        <ul>
-                                            <li ng-repeat="comment in response.comments track by $index">
-
-                                                <div ng-click="upVote(comment)" class="glyphicon glyphicon-hand-up"></div>
-                                                <div ng-click="downVote(comment)" class="glyphicon glyphicon-hand-down"> </div>
-                                                <p>Total Votes: {{comment.votes}}</p>
-                                                <p>{{comment.body}}</p>
-                                            </li>
-                                            <!--<span ng-click="setActiveReponse(response)"></span></li>-->
-                                        </ul>
-
-                                        <input type="text" name="input" ng-model="response.newComment.body" placeholder="Enter new comment">
-                                        <button ng-click="addComment(response)">Add Comment </button>
-                                    </div>
-                                </li>
-
-                        </ul>
-                        <input type="text" name="input" ng-model="newResponse.body" placeholder="Enter new response">
-                        <button ng-click="addResponse()">Add Response </button>
-                    </div>
-
-                    <!--<input type="text" name="input" ng-model="newComment" placeholder = "Enter new comment">
-                          <button ng-click="addComment()">Add Comment </button>  -->
-                </div>
-        </div>
-        </section>
-
-        <section class="comments-container" ng-show="activeResponse">
-            <div class="col-sm-12">
-                <div class="comments-header">
-                    <!--<h1 ng-click="activeQuestion = ''">GO BACK</h1>
-                        <h2>The Active Question is {{activeQuestion}}</h2>-->
-                    <h2>The Active Response is {{activeResponse}}</h2>
-
-                    <!--<h2 ng-bind="dummy"></h2>-->
-                </div>
-
+    <section class="responses-container">
+        <div class="col-sm-12">
+            <div class="response-header">
+                <h1 ng-click="goBack()">GO BACK</h1>
+                <!--activeQuestion=''-->
+                <h2>The Active Question is {{question.body}}</h2>
             </div>
-        </section>
-               
+            <div class="responses-list">
+                <ul>
+
+                    <li ng-repeat="response in responses">{{response.body}}
+                        <label>
+                            <input type="checkbox" ng-model="response.solution.value">Solution</label>
+
+
+                        <div ng-click="upVote(response)" class="glyphicon glyphicon-hand-up"> </div>
+                        <div ng-click="downVote(response)" class="glyphicon glyphicon-hand-down"> </div>
+                        <p>Total Votes: {{response.votes}}</p>
+                        <p>{{response.body}}</p>
+
+
+
+                        <div class="comments-list">
+                            <ul>
+                                <li ng-repeat="comment in response.comments track by $index">
+                                    <div ng-click="upVote(comment)" class="glyphicon glyphicon-hand-up"></div>
+                                    <div ng-click="downVote(comment)" class="glyphicon glyphicon-hand-down"> </div>
+                                    <p>Total Votes: {{comment.votes}}</p>
+                                    <p>{{comment.body}}</p>
+                                </li>
+                            </ul>
+
+                            <input type="text" name="input" ng-model="response.newComment.body" placeholder="Enter new comment">
+                            <!--<a ui-sref="question({id:response.comment.$id})" class="btn">ADD COMMENT</a>-->
+                            <button ng-click="addComment(newComment)">Add Comment </button>
+                        </div>
+                    </li>
+
+                </ul>
+                <input type="text" name="input" ng-model="newResponse.body" placeholder="Enter new response">
+                <button ng-click="addResponse(newResponse)">Add Response </button>
+            </div>
+
+            <!--<input type="text" name="input" ng-model="newComment" placeholder = "Enter new comment">
+                            <button ng-click="addComment()">Add Comment </button>  -->
+        </div>
+        </div>
+    </section>
+
+    <section class="comments-container">
+        <div class="col-sm-12">
+            <div class="comments-header">
+                <!--<h1 ng-click="activeQuestion = ''">GO BACK</h1>
+                            <h2>The Active Question is {{activeQuestion}}</h2>-->
+                <h2>The Active Response is {{response.body}}</h2>
+
+                <!--<h2 ng-bind="dummy"></h2>-->
+            </div>
+
+        </div>
+    </section>

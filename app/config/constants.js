@@ -9,3 +9,5 @@ app.constant('CONSTANTS', (function(){
 		tags: tags
 	}
 }()));
+
+app.constant('FBREF', 'https://questions-and-answer.firebaseio.com/')
