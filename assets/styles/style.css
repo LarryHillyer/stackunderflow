@@ -12,3 +12,79 @@
 	color: aliceblue;
 	background-color: #222;
 }
+.login {
+    width: 1899px;
+    top: 162.75px;
+    left: -1.13687e-13px;
+    height: auto;
+    color: aliceblue;
+    font-size: 65px;
+    line-height: 84px;
+    padding: 0px;
+    border-width: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    
+}
+herobox #hiw {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+  display: inline-block;
+  color: crimson;
+
+}
+#herobox #blurb {  
+  margin-left: 20px;
+  padding-top: 500px;
+  font-size: 25px;
+  font-weight: bold;
+  float: left;
+  width: 375px;
+  color: aliceblue;
+  vertical-align: bottom;
+  text-align: center;
+}
+#herobox #desc {
+    margin-top: 0px;
+    margin-left: 100px;
+    float: left;
+    color: darkred ;
+    font-size: 20px;
+}
+
+ol {
+    list-style: decimal;
+    margin-left: 20px;
+    margin-bottom: 1em;
+   
+}
+#herobox #hiw li {
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+    color: aliceblue;
+    
+}
+#herobox #q {
+    width: 125px;
+    margin-left: -30px;
+}
+#herobox #an {
+    width: 150px;
+    margin-left: 50px;
+}
+#herobox #b {
+    width: 200px;
+    margin-left: 120px;
+    vertical-align: top;
+    
+}
+#home {
+  background-image: url('http://www.amaravatiproperty.net/public/images/backgrounds/full-bg-7.jpg');
+  height: 100%;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
