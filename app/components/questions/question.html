@@ -25,9 +25,9 @@
                             <input type="checkbox" ng-model="response.solution.value">Solution</label>
 
 
-                        <div ng-click="upVote(response)" class="glyphicon glyphicon-hand-up"> </div>
-                        <div ng-click="downVote(response)" class="glyphicon glyphicon-hand-down"> </div>
-                        <p>Total Votes: {{response.votes}}</p>
+                        <div ng-click="changeVote('1')" class="glyphicon glyphicon-hand-up"> </div>
+                        <div ng-click="changeVote('0')" class="glyphicon glyphicon-hand-down"> </div>
+                        <p>Total Votes: {{question.voteCount}}</p>
                         <p>{{response.body}}</p>
 
 
@@ -35,8 +35,8 @@
                         <div class="comments-list">
                             <ul>
                                 <li ng-repeat="comment in response.comments track by $index">
-                                    <div ng-click="upVote(comment)" class="glyphicon glyphicon-hand-up"></div>
-                                    <div ng-click="downVote(comment)" class="glyphicon glyphicon-hand-down"> </div>
+                                    <div ng-click="changeVote('1')" class="glyphicon glyphicon-hand-up"></div>
+                                    <div ng-click="changeVote('0')" class="glyphicon glyphicon-hand-down"> </div>
                                     <p>Total Votes: {{comment.votes}}</p>
                                     <p>{{comment.body}}</p>
                                 </li>

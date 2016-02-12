@@ -14,7 +14,7 @@ app.controller('QuestionsController', function($rootScope, $scope, DataService, 
 	
 	  $scope.addQuestion = function(newQuestion){
 	 	newQuestion.memberId = $rootScope.member.$id;
-         $scope.newQuestion.date = Date.now();
+        $scope.newQuestion.date = Date.now();
 	 	$scope.questions.$add(newQuestion).then(function(ref){
 	  	  //Add the newly added question to the member object	
 	  	  $rootScope.member.questions = $rootScope.member.questions || {};
@@ -63,7 +63,27 @@ app.controller('QuestionController', function($rootScope, $scope, question, comm
 	 * ensure a member can only vote once is to use a dictonary or an object as question.votes 
 	 * 
 	 * think of it this way 
-	 * 
+	  */
+         
+
+    // $scope.changeVote = function (direction) {
+    //     $scope.question.votes = $scope.question.votes || {};
+    //     if (direction){
+    //     $scope.question.votes[$rootScope.member.$id] = 1;
+    //     } else {
+    //        $scope.question.votes[$rootScope.member.$id] = -1; 
+    //     }
+    //     calcVotes();
+    //     $scope.question.$save()
+    // } 
+     
+    //  function calcVotes(){
+    //     $scope.question.voteCount = 0;
+    //     for(var key in $scope.question.votes){
+	//  	    $scope.question.voteCount += $scope.question.votes[key];
+    //     }
+    //  }
+     /*
 	 * $scope.question.votes[$rootScope.member.$id] = 1 || -1
 	 * 
 	 * This logic here should help keep your voteCount on track
