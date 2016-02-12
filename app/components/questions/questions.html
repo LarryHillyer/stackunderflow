@@ -1,5 +1,3 @@
-<h1>QUESTIONS</h1>
-
 <!--<p>If we are logged in we should have a member obj {{member}}</p>
 
 <h2>Responsibilites</h2>
@@ -13,37 +11,36 @@
 <p>The question can be filtered based upon tags, unanswered</p>
 <p>No voting from this page.</p>-->
 <!--ng-show="!activeQuestion && member" -->
-<section class="question-container">  
-                <div class="col-sm-12">
-                    <div>
-                        <input type="text" ng-model="query" />
-                        <button class="btn-group" role="group" ng-click="sortOrder = 'tag'">Sort by Tag</button>
-                        <button class="btn-group" role="group" ng-click="sortOrder = 'userName'">Sort by User</button>
-                        <button class="btn-group" role="group" ng-click="sortOrder = '-date'">Sort by Date</button>
-                    </div>
-                    <div class="question-header">
-                        <h2 class="fa">Questions</h2>
-                    </div>
-                    <div class="question-list">
-                        <ul>
-                            <li ng-repeat="question in questions | filter: query | orderBy: sortOrder track by $index">
-                                <div ng-click="upVote(question)" class="glyphicon glyphicon-hand-up"></div>
-                                <div ng-click="downVote(question)" class="glyphicon glyphicon-hand-down"></div>
-                                <p>Total Votes: {{question.votes}}</p>
-                                <h3>{{question.questionSummary}}</h3>
-                                <p>{{question.tag}}</p>
-                                <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
-                                <br>
-                                <a ui-sref="question({id:question.$id})" class="btn">GO TO QUESTION</a>
-                                    <button ng-click="removeQuestion($index)">Remove YOUR QUESTION </button>
-                            </li>
-                        </ul>
-                        <input class="form-control" type="text" name="questionSummary" ng-model="newQuestion.questionSummary" style:="width: 300px"
-                        placeholder="Enter short description of your question">
-                        <input class="form-control" type="text" name="userName" ng-model="newQuestion.userName" size="width: 100px" placeholder="Enter your User Name">
-                        <input class="form-control" type="text" name="tag" ng-model="newQuestion.tag" size="width: 50px" placeholder="ie. Javascript, food, ...one word to categorize your queston">
-                        <textarea row="5" class="form-control" type="text" name="Question" ng-model="newQuestion.body" placeholder="Enter your Question (long version)"></textarea>
-                        <button ng-click="addQuestion(newQuestion)">Add Question </button>
-                    </div>
-                </div>
-            </section>
+
+<!-- Brand and toggle get grouped for better mobile display -->
+
+
+<!--<section class="question-container">-->
+        <div class="well" >
+            <input class="form-control" type="text" name="questionSummary" ng-model="newQuestion.questionSummary" style:="width: 250px"
+            placeholder="Enter short description of your question">
+            <input class="form-control" type="text" name="userName" ng-model="newQuestion.userName" size="width: 300px" placeholder="Enter your User Name">
+            <input class="form-control" type="text" name="tag" ng-model="newQuestion.tag" size="width: 150px" placeholder="ie. Javascript, food, ...one word to categorize your queston">
+            <textarea row="5" class="form-control" type="text" name="Question" ng-model="newQuestion.body" placeholder="Enter your Question (long version)"></textarea>
+            <button ng-click="addQuestion(newQuestion)">Add Question </button>
+        </div>
+        <div class="question-header">
+            <h1>QUESTIONS</h1>
+        </div>
+        <div class="question-list">
+            <ul>
+                <li ng-repeat="question in questions | filter: query | orderBy: sortOrder track by $index">
+                    <div ng-click="upVote(question)" class="glyphicon glyphicon-hand-up"></div>
+                    <div ng-click="downVote(question)" class="glyphicon glyphicon-hand-down"></div>
+                    <p>Total Votes: {{question.votes}}</p>
+                    <h3>{{question.questionSummary}}</h3>
+                    <p>{{question.tag}}</p>
+                    <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
+                    <br>
+                    <a ui-sref="question({id:question.$id})" class="btn">GO TO QUESTION</a>
+                    <button ng-click="removeQuestion($index)">REMOVE YOUR QUESTION </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+<!--</section>-->

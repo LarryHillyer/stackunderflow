@@ -10,6 +10,12 @@ app.controller('DashboardController', function($rootScope, $scope){
 	 * */
      
       $scope.updateMember = function () {
+        
+        $rootScope.member.accountCreated = Date.now();
+        $rootScope.member.upVotes = 0;
+        $rootScope.member.downVotes = 0;
+        $rootScope.member.reputation = 0;
+           
 		$rootScope.member.$save()
 		// firstName: string,
 		// lastName: string,
