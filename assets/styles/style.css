@@ -12,7 +12,69 @@
 	color: aliceblue;
 	background-color: #222;
 }
-Style for login page
+/*STYLES FOR VOTE CELL*/
+.votecell {
+    display: block;
+    color: #777;
+    border: 2px border-style;
+    border-color: black;
+    vertical-align: top;
+    padding-right: 0px;
+    padding-left: 0px;
+    min-width: 75; 
+    min-height: 1000px;
+}
+.vote {
+    margin: 8;
+    min-width: 25px;
+    min-height: 50px;
+    text-align: center;
+    vertical-align: top;
+    padding-right: 8px;
+    padding-left: 8px;
+    border-style: solid;
+    border-width: .5px;
+    border-radius: 3px;
+    border-color: #777;
+}
+.vote-count-post {
+    margin: 8px 0;
+}
+.vote span {
+    display: block;
+    color: #777;
+}
+.answercell {
+    margin-left: 20px;
+    
+    min-height: 70px;
+    display: block;
+    color: #777;
+    font-weight: bold;
+}
+/*STYLES FOR DASHBOARD*/
+.bs-example {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: grey;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    border-style: solid;
+}
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: center;
+}
+
+
+    width: 250px; 
+    height: 35px;
+}
+
+/*STYLES FOR LOGIN PAGE*/
 .login {
     width: 1899px;
     top: 162.75px;

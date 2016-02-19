@@ -13,7 +13,8 @@ app.controller('QuestionsController', function($rootScope, $scope, DataService, 
 	
 	
 	  $scope.addQuestion = function(newQuestion){
-	 	newQuestion.memberId = $rootScope.member.$id;
+	 	newQuestion.memberId = $rootScope.member.$id
+        $scope.newQuestion.userName = $rootScope.userName; 
         $scope.newQuestion.date = Date.now();
 	 	$scope.questions.$add(newQuestion).then(function(ref){
 	  	  //Add the newly added question to the member object	
@@ -63,26 +64,26 @@ app.controller('QuestionController', function($rootScope, $scope, question, comm
 	 * ensure a member can only vote once is to use a dictonary or an object as question.votes 
 	 * 
 	 * think of it this way 
-	  */
+	/*  
          
 
-    // $scope.changeVote = function (direction) {
-    //     $scope.question.votes = $scope.question.votes || {};
-    //     if (direction){
-    //     $scope.question.votes[$rootScope.member.$id] = 1;
-    //     } else {
-    //        $scope.question.votes[$rootScope.member.$id] = -1; 
-    //     }
-    //     calcVotes();
-    //     $scope.question.$save()
-    // } 
+        $scope.changeVote = function (direction) {
+        $scope.question.votes = $scope.question.votes || {};
+         if (direction){
+        $scope.question.votes[$rootScope.member.$id] = 1;
+         } else {
+            $scope.question.votes[$rootScope.member.$id] = -1; 
+         }
+         calcVotes();
+        $scope.question.$save()
+        } 
      
-    //  function calcVotes(){
-    //     $scope.question.voteCount = 0;
-    //     for(var key in $scope.question.votes){
-	//  	    $scope.question.voteCount += $scope.question.votes[key];
-    //     }
-    //  }
+        function calcVotes(){
+            $scope.question.voteCount = 0;
+        for(var key in $scope.question.votes){
+            $scope.question.voteCount += $scope.question.votes[key];
+            }
+        }
      /*
 	 * $scope.question.votes[$rootScope.member.$id] = 1 || -1
 	 * 
@@ -95,13 +96,54 @@ app.controller('QuestionController', function($rootScope, $scope, question, comm
 	 * Don't forget to call $scope.question.$save() after updating the question properties
 	 * Also anytime you update $rootScope.member don't forget $rootScope.member.$save() to write it to the db
 	 * */
+    $scope.changeVote = function (direction) {
+        $scope.question.votes = $scope.question.votes || {};
+        if (direction) {
+            $scope.question.votes[$rootScope.member.$id] = 1;
+        } else {
+            $scope.question.votes[$rootScope.member.$id] = -1;
+        }
+        calcVotes();
+        $scope.question.$save()
+    }
+
+
+
+    function calcResVotes() {
+        $scope.response.voteCount = 0;
+        for (var key in $scope.response.votes) {
+            $scope.response.voteCount += $scope.response.votes[key];
+        }
+    }
+     
+        $scope.changeVote = function (direction) {
+        $scope.response.votes = $scope.question.votes || {};
+        if (direction) {
+            $scope.question.votes[$rootScope.member.$id] = 1;
+        } else {
+            $scope.question.votes[$rootScope.member.$id] = -1;
+        }
+        calcVotes();
+        $scope.question.$save()
+    }
+
+    function calcVotes() {
+        $scope.question.voteCount = 0;
+        for (var key in $scope.question.votes) {
+            $scope.question.voteCount += $scope.question.votes[key];
+        }
+    } 
+     
 	$scope.question = question;
 	$scope.comments = comments;
 	$scope.responses = responses;
 	
 
-	  $scope.addComment = function(newQuestion){
+	  $scope.addComment = function(newComment){
 	  	$scope.newComment.memberId = $rootScope.member.$id;
+        $scope.newcomment.userName = $rootScope.userName;
+        $scope.newComment.date = Date.now();
+          
 	 	$scope.comments.$add(newQuestion).then(function(ref){
 	  	  //Add the newly added comment to the member object	
 	  	  $rootScope.member.comments = $rootScope.member.comments || {};

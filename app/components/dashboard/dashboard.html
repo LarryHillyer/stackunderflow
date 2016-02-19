@@ -33,100 +33,111 @@
 
 	WARNING: Firebase will not allow you to add null properties to any object. When you need the specific field you can simply create it and pass its value. -->
 
-<div class="col-xs-2 col-xs-offset-.5">
-    <img src="{{member.imgUrl}}" class="img-thumbnail img-responsive img-circle">
-    <hr>
-    <input ng-model="member.imgUrl" type="url" id="imgUrl" placeholder="Profile Picture" class="input-step" data-step="1">
-    <label for="imgUrl">Profile Image URL</label>
-    <hr>
-    <div>
-        <label for="fav-tags" class="bold">Pick a few tags that interest you.</label>
-        <input type="text" name="FavoriteTags" id="favoriteTags" placeholder="e.g. Javascript, java, c#, php, jquery, python, android, ios..."
-        class="input-step" data-step="2" style="display: none;">
-        <div class="tag-editor" style="width: 449px; height: 35px;">
-            <input type="text" tabindex="0" placeholder="e.g. Javascript, java, c#, php, jquery, python, android, ios..." style="width: 441px;">
-        </div>
-        <div class="informative-tooltip arrow left-center">
-            <hr> Picking tags will help us show you much more relevant questions and answers.
-            <br> to add more than one tag simply your tags with a comma
-        </div>
-    </div>
-</div>
+<form ng-submit="updateMember()" class="input-group-addon">
+    <!--COLUMN ONE -->
+    <div class="col-xs-2 col-xs-offset-.5">
+        <div class="input-container-block input-container-tags">
+            <img src="{{member.imgUrl}}" class="img-thumbnail img-responsive img-circle" style="width: 250px">
 
-</div>
-<div class="col-xs-2 col-xs-offset-2">
-    <div class="input-container-block input-container-tags">
-        <div class="row">
-            <div class="input-container-block input-container-tags">
-                <!--<div class="col-xs-2 col-xs-offset-1">-->
-                <!--<div class="row">-->
-                <!--<h4 class="text-center"><i class="fa fa-fw fa-user fa-2x"></i> {{member.firstName}} {{member.lastName}}</h4>-->
-                <!--<h4 class="text-center"><i class="fa fa-fw fa-map-marker fa-2x"></i> {{member.country}}</h4>-->
+            <div>
+                <label for="imgUrl">Profile Image URL</label>
+                <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input ng-model="member.imgUrl" type="url" id="imgUrl" placeholder="Profile Picture" style="width: 440px;">
+                </div>
             </div>
-
-            <div class="input-container-block input-container-tags">
-                <label for="display-name" class="bold">What should we call you?</label>
-                <input ng-model="member.username" type="text" name="NickName" id="username" maxlength="30" value="John. Kent" placeholder="Real Names or handles, just don't be 'User9123'."
-                class="input-step" data-step="3">
-                <div class="informative-tooltip arrow left-center">
-                    <span style="width: 650px">Your display name will appear on your posts and comments.</span>
-                    <div class="tag-editor" style="width: 449px; height: 35px;">
-                        <label for="firstName">First Name</label>
-                        <input ng-model="member.firstName" type="string" class="form-control" id="firstName" placeholder="First Name" class="input-step"
-                        data-step="4">
-                        <div class="informative-tooltip arrow left-center">
-                            <label for="lastName">Last Name</label>
-                            <input ng-model="member.lastName" type="string" class="form-control" id="lastName" placeholder="Last Name" class="input-step"
-                            data-step="5">
-                            <div class="informative-tooltip arrow left-center">
-                                <label for="country">Country</label>
-                                <input ng-model="member.country" type="text" class="form-control" id="country" placeholder="Country" class="input-step" data-step="5">
-                                <div class="informative-tooltip arrow left-center">
-                                </div>
-                            </div>
-                            <hr>
-                            <hr>
-                            <hr>
-                            <div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
+            <div>
+                <label for="fav-tags" class="bold">Pick a few tags that interest you.</label>
+                <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input type="text" tabindex="0" placeholder="e.g. Javascript, java, c#, php, jquery, python, android, ios..." style="width: 440px;">
+                    <div> Picking tags will help us show you much more relevant questions and
+                        <br>answers. to add more than one tag simply your tags with a comma</div>
+                    <div>
+                        <br>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-<div class="col-sm-4 col-xs-offset-2">
-    <div class="input-container-block input-container-tags">
-        <div class="row">
-            <!--<div class="input-container-block input-container-tags">-->
-                <!--<div class="col-xs-2 col-xs-offset-2">-->
-                    <label for="bio">Bio</label>
-                    <input ng-model="member.bio" type="text" class="form-control" id="bio" placeholder="Short Bio" class="input-step" data-step="6">
-                    <div class="informative-tooltip arrow left-center">
-                        <label for="websiteUrl">Website URL</label>
+    <!--END OF COLUMN ONE   -->
+    <div class="col-xs-2 col-xs-offset-1">
+        <div class="input-container-block input-container-tags">
+            <!--<div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+            </div>-->
+            <div>
+                <label for="display-name">What should we call you?</label>
+                <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input ng-model="member.username" type="string" class="form-control" id="username" value="John. Kent" placeholder="Real Names or handles, just don't be 'User9123'."
+                    class="input-step" data-step="3">
+                    <h5 style="width: 250px;">Your display name will appear on<br>your posts and comments.
+                    </h5>
+                </div>
+                <hr>
+            </div>
+            <div>
+                <label for="firstName">First Name</label>
+                <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input ng-model="member.firstName" type="string" class="form-control" id="firstName" placeholder="First Name" class="input-step"
+                    data-step="4">
+                </div>
+            </div>
+            <div>
+                <label for="lastName">Last Name</label>
+                <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input ng-model="member.lastName" type="string" class="form-control" id="lastName" placeholder="Last Name" class="input-step"
+                    data-step="5">
+                </div>
+            </div>
+            <div>
+                <label for="country">Country</label>
+                <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input ng-model="member.country" type="text" class="form-control" id="country" placeholder="Country" class="input-step" data-step="5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--END OF COLUMN TWO   -->
+    <div class="col-sm-3 col-sm-offset-.5">
+        <div class="input-container-block input-container-tags">
+            <div class="row">
+            <div>
+                <label for="country">Email</label>
+                <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input ng-model="member.email" type="text" class="form-control" id="email" placeholder="email" class="input-step" data-step="5">
+                </div>
+            </div>
+                <div>
+                    <label for="websiteUrl">Website URL</label>
+                    <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
                         <input ng-model="member.websiteUrl" type="url" class="form-control" id="websiteUrl" placeholder="Website URL" class="input-step"
                         data-step="7">
-                        <div class="informative-tooltip arrow left-center">>
-                            <label for="twitterHandle">Twitter Handle</label>
-                            <input ng-model="member.twitterHandle" type="text" class="form-control" id="twitterHandle" placeholder="Twitter Handle" class="input-step"
-                            data-step="8">
-                            <div class="informative-tooltip arrow left-center">
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="twitterHandle">Twitter Handle</label>
+                    <div class="tag-editor" style="width: 250px; height: 45px; text-align: bottom;">
+                    <input ng-model="member.twitterHandle" type="text" class="form-control" id="twitterHandle" placeholder="Twitter Handle" class="input-step"
+                    data-step="8">
+                </div>
+                <div>
+                    <label for="bio">Bio</label>
+                    <div class="tag-editor" rows="10" cols="30" style="width: 250px; height: 45px; text-align: bottom;">
+                        <textarea ng-model="member.bio" type="textarea" rows="5" cols="60" class="form-control" id="bio" placeholder="Short Bio"
+                        class="input-step" data-step="6"></textarea>
                     </div>
 
-                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
+                </div>
+                <div class="well" style="width: 115px; vertical align: bottom;">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+</form>
 
-<!--<form ng-submit="updateMember()">-->
+
+
 <!--<div class="form-group">
         <label for="username">Username</label>
         <input ng-model="member.username" type="text" class="form-control" id="username" placeholder="username">
